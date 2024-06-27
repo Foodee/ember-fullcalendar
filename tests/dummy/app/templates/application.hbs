@@ -15,14 +15,28 @@
 <br>
 <br>
 
-<h3>Change Current Date</h3>
-<button onclick={{action "changeDate"}}>Move Date 7 Days from Now</button>
-<button onclick={{action "next"}}>Calendar.next()</button>
-<br>
-<br>
-
-{{#if fastboot.isFastBoot}}
-  loading...
-{{else}}
-  {{full-calendar plugins=plugins events=eventsArray viewName=viewName date=startDate viewSkeletonRender=(action "viewSkeletonRender")}}
-{{/if}}
+<FullCalendar
+  @plugins={{plugins}}
+  @events={{eventsArray}}
+  @viewName={{viewName}}
+  @date={{startDate}}
+  @viewDidMount={{action "viewDidMount"}}
+  @timezone="UTC"
+  @eventRender={{this.eventRender}}
+  @resources={{this.resources}}
+  @datesAboveResources={{true}}
+  @groupByDateAndResource={{true}}
+  @firstDay={{0}}
+  @allDaySlot={{true}}
+  @dayHeaderFormat={{hash weekday="long"}}
+  @weekday="long"
+  @slotEventOverlap={{false}}
+  @slotDuration="00:15:00"
+  @slotLabelInterval="01:00"
+  @slotMinTime="00:00"
+  @slotMaxTime="23:00"
+  @nowIndicator={{true}}
+  @selectable={{true}}
+  @editable={{true}}
+  @selectHelper={{true}}
+/>

@@ -50,8 +50,8 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins events=eventsArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 4);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4');
+    assert.equal(findAll('.fc-event-title').length, 4);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4');
   });
 
   test('replacing events rerenders events', async function (assert) {
@@ -61,8 +61,8 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins events=eventsArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 4);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4');
+    assert.equal(findAll('.fc-event-title').length, 4);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4');
 
     this.set('eventsArray', Ember.A([{
       title: 'New Event 1',
@@ -74,8 +74,8 @@ module('Integration | Component | full calendar', function(hooks) {
       end: moment({ day: 6, hour: 9, minute: 8, second: 8 }).toDate()
     }]));
 
-    assert.equal(findAll('.fc-title').length, 2);
-    assert.equal(concatTextContent('.fc-title'), 'New Event 1New Event 2');
+    assert.equal(findAll('.fc-event-title').length, 2);
+    assert.equal(concatTextContent('.fc-event-title'), 'New Event 1New Event 2');
   });
 
   test('set events to empty array removes events', async function (assert) {
@@ -85,12 +85,12 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins events=eventsArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 4);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4');
+    assert.equal(findAll('.fc-event-title').length, 4);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4');
 
     this.set('eventsArray', []);
 
-    assert.equal(findAll('.fc-title').length, 0);
+    assert.equal(findAll('.fc-event-title').length, 0);
   });
 
   test('it removes events', async function (assert) {
@@ -100,13 +100,13 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins events=eventsArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 4);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4');
+    assert.equal(findAll('.fc-event-title').length, 4);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4');
 
     eventsArray.removeAt(2);
 
-    assert.equal(findAll('.fc-title').length, 3);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 4');
+    assert.equal(findAll('.fc-event-title').length, 3);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 4');
   });
 
   test('it adds events', async function (assert) {
@@ -116,8 +116,8 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins events=eventsArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 4);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4');
+    assert.equal(findAll('.fc-event-title').length, 4);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4');
 
     eventsArray.insertAt(2, {
       title: 'New Event',
@@ -125,8 +125,8 @@ module('Integration | Component | full calendar', function(hooks) {
       end: moment({ day: 15, hour: 9, minute: 8, second: 8 }).toDate()
     });
 
-    assert.equal(findAll('.fc-title').length, 5);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2Event 3Event 4New Event');
+    assert.equal(findAll('.fc-event-title').length, 5);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2Event 3Event 4New Event');
   });
 
   skip('it supports changes in resources array', async function (assert) {
@@ -141,7 +141,7 @@ module('Integration | Component | full calendar', function(hooks) {
 
     this.plugins.push(resourceDayGridPlugin);
 
-    await render(hbs`{{full-calendar defaultView="resourceDayGridDay" plugins=plugins resources=resourcesArray}}`);
+    await render(hbs`{{full-calendar initialView="resourceDayGridDay" plugins=plugins resources=resourcesArray}}`);
 
     assert.equal(findAll('.fc-resource-cell').length, 1);
     assert.equal(find('.fc-resource-cell').textContent, 'Room A');
@@ -167,7 +167,7 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins eventSources=eventSourcesArray}}`);
 
-    assert.equal(findAll('.fc-title').length, 1);
+    assert.equal(findAll('.fc-event-title').length, 1);
 
     eventSourcesArray.pushObject([{
       title: 'Event 2',
@@ -175,8 +175,8 @@ module('Integration | Component | full calendar', function(hooks) {
       end: moment({ day: 6, hour: 9, minute: 8, second: 8 }).toDate()
     }]);
 
-    assert.equal(findAll('.fc-title').length, 2);
-    assert.equal(concatTextContent('.fc-title'), 'Event 1Event 2');
+    assert.equal(findAll('.fc-event-title').length, 2);
+    assert.equal(concatTextContent('.fc-event-title'), 'Event 1Event 2');
   });
 
   test('it supports change of viewName property', async function (assert) {
@@ -184,22 +184,22 @@ module('Integration | Component | full calendar', function(hooks) {
 
     await render(hbs`{{full-calendar plugins=plugins viewName=viewName}}`);
 
-    assert.equal(findAll('.fc-day').length, 1);
+    assert.equal(findAll('.fc-daygrid-day-frame').length, 1);
 
     this.set('viewName', 'dayGridWeek');
 
-    assert.equal(findAll('.fc-day').length, 7);
+    assert.equal(findAll('.fc-daygrid-day-frame').length, 7);
   });
 
   test('it supports change of date property', async function (assert) {
     this.set('date', '2019-07-01');
 
-    await render(hbs`{{full-calendar defaultView="dayGridDay" plugins=plugins date=date}}`);
+    await render(hbs`{{full-calendar initialView="dayGridDay" plugins=plugins date=date}}`);
 
-    assert.equal(find('.fc-day-header').textContent, 'Monday');
+    assert.equal(find('.fc-day').textContent, 'Monday');
 
     this.set('date', '2019-07-02');
 
-    assert.equal(find('.fc-day-header').textContent, 'Tuesday');
+    assert.equal(find('.fc-day').textContent, 'Tuesday');
   });
 });

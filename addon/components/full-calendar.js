@@ -41,40 +41,62 @@ export default Component.extend(InvokeActionMixin, {
     'rerenderDelay', 'defaultRangeSeparator',
 
     // toolbar
-    'header', 'footer', 'titleFormat', 'titleRangeSeparator', 'buttonText', 'buttonIcons', 'customButtons',
+    'headerToolbar', 'footerToolbar', 'titleFormat', 'titleRangeSeparator', 'buttonText', 'buttonIcons', 'customButtons',
 
     // theme
     'themeSystem', 'bootstrapGlyphicons', 'bootstrapFontawesome',
 
     // sizing
-    'height', 'contentHeight', 'aspectRatio', 'handleWindowResize', 'windowResizeDelay',
+    'height', 'contentHeight', 'aspectRatio', 'handleWindowResize', 'windowResizeDelay', 'stickyHeaderDates', 'stickyFooterScrollbar',
 
     // views
-    'views', 'defaultView', 'fixedWeekCount', 'showNonCurrentDates', 'allDaySlot', 'allDayText', 'slotEventOverlap',
-    'timeGridEventMinHeight',
+    'views', 'initialView', 'fixedWeekCount', 'showNonCurrentDates', 'slotEventOverlap',
+    'eventMinHeight', 'allDaySlot',
+
+    // views hooks
+    'allDayClassNames', 'allDayContent', 'allDayDidMount', 'allDayWillUnmount',
 
     // list
-    'listDayFormat', 'listDayAltFormat', 'noEventsMessage',
+    'listDayFormat', 'listDaySideFormat',
 
-    // timeline
-    'resourceGroupField', 'resourceGroupText', 'resourceAreaWidth', 'resourceLabelText', 'resourceColumns',
-    'resourcesInitiallyExpanded', 'slotWidth', 'datesAboveResources',
+    // list hooks
+    'noEventsClassNames', 'noEventsContent', 'noEventsDidMount', 'noEventsWillUnmount',
+
+    // resource
+    'resourceGroupField', 'resourceAreaWidth', 'resourceAreaColumns', 'resourcesInitiallyExpanded',
+    'slotMinWidth', 'datesAboveResources',
+
+    // resource hooks
+    'resourceGroupLabelClassNames', 'resourceGroupLabelContent', 'resourceGroupLabelDidMount', 'resourceGroupLabelWillUnmount',
+    'resourceGroupLaneClassNames', 'resourceGroupLaneContent', 'resourceGroupLaneDidMount', 'resourceGroupLaneWillUnmount',
+    'resourceAreaHeaderClassNames', 'resourceAreaHeaderContent', 'resourceAreaHeaderDidMount', 'resourceAreaHeaderWillUnmount',
+
+
+    // slot hooks
+    'slotLabelClassNames', 'slotLabelContent', 'slotLabelDidMount', 'slotLabelWillUnmount', 'slotLaneClassNames',
+    'slotLaneContent', 'slotLaneDidMount', 'slotLaneWillUnmount',
 
     // custom views
     'duration', 'dayCount', 'visibleRange',
 
     // date & time
-    'weekends', 'hiddenDays', 'columnHeader', 'columnHeaderFormat', 'columnHeaderText', 'columnHeaderHtml',
-    'slotDuration', 'slotLabelInterval', 'slotLabelFormat', 'minTime', 'maxTime', 'scrollTime',
+    'weekends', 'hiddenDays', 'dayHeaders', 'dayHeaderFormat', 'slotDuration', 'slotLabelInterval', 'slotLabelFormat',
+    'slotMinTime', 'slotMaxTime', 'scrollTime',
+
+    // date & time hooks
+    'dayHeaderClassNames', 'dayHeaderContent', 'dayHeaderDidMount', 'dayHeaderWillMount',
 
     // date navigation
-    'defaultDate', 'dateIncrement', 'dateAlignment', 'validRange',
+    'initialDate', 'dateIncrement', 'dateAlignment', 'validRange',
 
     // date nav links
     'navLinks', 'navLinkDayClick', 'navLinkWeekClick',
 
     // week numbers
-    'weekNumbers', 'weekNumbersWithinDays', 'weekNumberCalculation', 'weekLabel',
+    'weekNumbers', 'weekNumbersWithinDays', 'weekNumberCalculation', 'weekText', 'weekNumberFormat',
+
+    // Week numbers hooks
+    'weekNumberClassNames', 'weekNumberContent', 'weekNumberDidMount', 'weekNumberWillUnmount',
 
     // selection
     'selectable', 'selectMirror', 'unselectAuto', 'unselectCancel', 'selectOverlap', 'selectConstraint', 'selectAllow',
@@ -83,18 +105,21 @@ export default Component.extend(InvokeActionMixin, {
     // now indicator
     'nowIndicator', 'now',
 
+    // how indicator hooks
+    'nowIndicatorClassNames', 'nowIndicatorContent', 'nowIndicatorDidMount', 'nowIndicatorWillUnmount',
+
     // business hours
     'businessHours',
 
     // event model
-    'eventDataTransform', 'allDayDefault', 'defaultTimedEventDuration', 'defaultAllDayEventDuration', 'forceEventDuration',
+    'eventDataTransform', 'defaultAllDay', 'defaultTimedEventDuration', 'defaultAllDayEventDuration', 'forceEventDuration',
 
     // event sources
     'events', 'eventSources', 'startParam', 'endParam', 'timezoneParam', 'lazyFetching',
 
     // event display
     'eventColor', 'eventBackgroundColor', 'eventBorderColor', 'eventTextColor', 'eventTimeFormat',
-    'displayEventTime', 'displayEventEnd', 'nextDayThreshold', 'eventOrder', 'progressiveEventRendering',
+    'displayEventTime', 'displayEventEnd', 'nextDayThreshold', 'eventOrder', 'progressiveeventRendering',
 
     // event dragging & resizing
     'editable', 'eventStartEditable', 'eventResizableFromStart', 'eventDurationEditable', 'eventResourceEditable',
@@ -102,16 +127,18 @@ export default Component.extend(InvokeActionMixin, {
     'eventOverlap', 'eventConstraint', 'eventAllow', 'dropAccept',
 
     // event popover
-    'eventLimit', 'eventLimitClick', 'eventLimitText', 'dayPopoverFormat',
+    'dayMaxEventRows', 'moreLinkClick', 'dayPopoverFormat', 'moreLinkClassNames', 'moreLinkContent', 'moreLinkDidMount',
+    'moreLinkWillUnmount',
 
     // resource data
     'resources', 'refetchResourcesOnNavigate',
 
     // resources
-    'resourceOrder', 'filterResourcesWithEvents', 'resourceText',
+    'resourceOrder', 'filterResourcesWithEvents', 'resourceLabelClassNames', 'resourceLabelContent', 'resourceLabelDidMount',
+    'resourceLabelWillUnmount', 'resourceLaneClassNames', 'resourceLaneContent', 'resourceLaneDidMount', 'resourceLaneWillUnmount',
 
     // international
-    'locale', 'locales', 'firstDay', 'dir',
+    'locale', 'locales', 'firstDay', 'direction',
 
     // timezone
     'timeZone',
@@ -128,10 +155,16 @@ export default Component.extend(InvokeActionMixin, {
     'windowResize',
 
     // view api
-    'viewSkeletonRender', 'viewSkeletonDestroy', 'datesRender', 'datesDestroy',
+    'viewClassNames', 'viewDidMount', 'viewWillUnmount', 'datesSet',
 
-    // date & time
-    'dayRender',
+    // for injecting classNames
+    'dayCellClassNames',
+    // for if you injected DOM content via dayRender
+    'dayCellContent',
+    // for if you needed the DOM element in dayRender
+    'dayCellDidMount',
+    'dayCellWillUnmount',
+    'dayMinWidth',
 
     // date clicking & selecting
     'dateClick', 'select', 'unselect',
@@ -139,8 +172,8 @@ export default Component.extend(InvokeActionMixin, {
     // event sources
     'eventSourceSuccess', 'eventSourceFailure', 'loading',
 
-    // event display
-    'eventRender', 'eventPositioned', 'eventDestroy',
+    // event display hooks
+    'eventClassNames', 'eventContent', 'eventDidMount', 'eventWillUnmount',
 
     // clicking and hovering
     'eventClick', 'eventMouseEnter', 'eventMouseLeave',
@@ -151,6 +184,15 @@ export default Component.extend(InvokeActionMixin, {
 
     // resource rendering
     'resourceRender',
+
+    // manipulation
+    'eventDrop', 'eventResize', 'eventReceive', 'eventLeave', 'eventAdd', 'eventChange', 'eventRemove', 'eventsSet',
+    'initialEvents',
+
+    // resource hooks
+    'resourceAdd', 'resourceChange', 'resourceRemove', 'resourcesSet',
+
+
   ],
 
   /////////////////////////////////////
@@ -201,7 +243,14 @@ export default Component.extend(InvokeActionMixin, {
         calendarOptions: newOptions
       });
     }
-    this.calendar.mutateOptions(updates, removals, false, deepEqual);
+
+    Object.entries(updates).forEach(([key, value]) => {
+      this.calendar.setOption(key, value)
+    });
+
+    Object.entries(removals).forEach(([key, value]) => {
+      this.calendar.setOption(key, value)
+    });
   },
 
   /*
@@ -245,11 +294,11 @@ export default Component.extend(InvokeActionMixin, {
 
     // Handle overriden properties
     if (this.get('viewName') !== undefined) {
-      options['defaultView'] = this.get('viewName');
+      options['initialView'] = this.get('viewName');
     }
 
     if (this.get('date') !== undefined) {
-      options['defaultDate'] = this.get('date');
+      options['initialDate'] = this.get('date');
     }
 
     return options;

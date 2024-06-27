@@ -23,16 +23,6 @@ module.exports = {
       target = target.app;
     }
 
-    var config = target.project.config(target.env) || {};
-
-    var plugins = config.emberFullCalendar.plugins || [
-      'core',
-    ];
-
-    plugins.forEach(plugin => {
-      this.import(`node_modules/@fullcalendar/${plugin}/main.css`);
-    });
-
     this._super.included.apply(this, arguments);
   }
 };
